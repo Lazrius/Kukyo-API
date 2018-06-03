@@ -1,0 +1,43 @@
+{
+  "name": "kukyo-api",
+  "version": "1.0.0",
+  "description": "Simple REST API for fetching random images",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "build": "babel build --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LazDisco/Kukyo-API.git"
+  },
+  "author": "Laz#1453",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LazDisco/Kukyo-API/issues"
+  },
+  "homepage": "https://github.com/LazDisco/Kukyo-API#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "nib": "^1.1.2",
+    "pug": "^2.0.3",
+    "serve-favicon": "^2.5.0",
+    "stylus": "^0.54.5"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  }
+}
