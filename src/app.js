@@ -14,12 +14,10 @@ let port = process.env.port || 7000 ;// Allow custom port number to be specified
 let src = process.env.src || `img/`; // Allow custom img dir names, but default to a folder called /img/
 
 let app = express(); // Init
-app.set('view engine', 'pug');
-app.use(favicon(__dirname + '/public/img/favicon.ico'))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.set('view engine', 'pug'); // Allow us to process pug files
+app.use(favicon(__dirname + '/public/img/favicon.ico')) // The icon for the website
 
-function compile(str, path) {
+function compile(str, path) { // Compile function for stylus 
     return stylus(str)
       .set('filename', path)
       .use(nib())
@@ -32,25 +30,32 @@ app.use(stylus.middleware(
     }
 ));
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/public'))); // Where we load out static assets from
 
+// Home Route
 app.get('/', (req, res) => {
     res.send("Chicken")
 })
 
+// API Route - Here you should list all the endpoints
 app.get('/api/', (req, res) => {
     res.send("hu")
 })
 
+// Endpoint for cats
 app.get('/api/cat/', (req, res) => {
-    if(activeEndpoints.cats == 0) return res.send(JSON.stringify({ error: { "API ERROR": "ENDPOINT NOT ACTIVE IN CONFIG FILE" } }, null, 3));
-    let type = src + 'cats/';
-    getImages(__dirname + '/public/' + type, req, type)
-    .then(r => {
-        res.header("Content-Type", "application/json")
-        res.send(JSON.stringify({cat: r[Math.floor(Math.random()*r.length)]}, null, 3));
+    if(activeEndpoints.cats != 1) 
+    {
+        // If we don't have the route listed in the activeEndpoints.js file - display this message.
+        return res.send(JSON.stringify({ error: { "API ERROR": "ENDPOINT NOT ACTIVE IN CONFIG FILE" } }, null, 3));
+    }
+    let type = src + 'cats/'; // Directory name
+    getImages(__dirname + '/public/' + type, req, type) // Get all the images from the specified directory
+    .then(r => { // We get an array of those images
+        res.header("Content-Type", "application/json") // Set our header to JSON
+        res.send(JSON.stringify({cat: r[Math.floor(Math.random()*r.length)]}, null, 3)); // Pick an image at random and send it to the client
     })
-    .catch((e) => res.send(JSON.stringify({ error: [ e ] }, null, 3)));
+    .catch((e) => res.send(JSON.stringify({ error: [ e ] }, null, 3))); // If there is a error, send it.
 })
 
 app.listen(port, () => console.log(`API active and listening on port ${port}`));

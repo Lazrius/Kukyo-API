@@ -13,7 +13,7 @@ export function getImages(src, req, type) { // Pass in img dir and our request
         let pictures = []; // New empty array
         files.forEach((file) => { // Loop over files
             if(extensions.indexOf(path.extname(src + file).toLowerCase()) !== -1) { // If the extention matches the ones in our array
-                let url = req.protocol + '://' + req.get('host') +'/' + type;
+                let url = req.protocol + '://' + req.get('host') +'/' + type; // Our URL - this makes sure it will pick the right website name, no matter where it's hosted.
                 pictures.push(path.join(url + file)) // Add it to the array
             }
         });
