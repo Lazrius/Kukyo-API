@@ -18,14 +18,14 @@ You can add your own custom routes by copying the default cat route and changing
 ````js
 app.get('/api/foxes/', (req, res) => {
 
-if(activeEndpoints.foxes  ==  0) return  res.send(JSON.stringify({ error: { "API ERROR":  "ENDPOINT NOT ACTIVE IN CONFIG FILE" } }, null, 3));
-let  type  =  src  +  'foxes/';
-getImages(__dirname  +  '/public/'  +  type, req, type)
-.then(r  => {
-res.header("Content-Type", "application/json")
-res.send(JSON.stringify({fox:  r[Math.floor(Math.random()*r.length)]}, null, 3));
-})
-.catch((e) =>  res.send(JSON.stringify({ error: [ e ] }, null, 3)));
+  if(activeEndpoints.foxes  ==  0) return  res.send(JSON.stringify({ error: { "API ERROR":  "ENDPOINT NOT ACTIVE IN CONFIG FILE" } }, null, 3));
+    let  type  =  src  +  'foxes/';
+    getImages(__dirname  +  '/public/'  +  type, req, type)
+      .then(r  => {
+        res.header("Content-Type", "application/json")
+        res.send(JSON.stringify({fox:  r[Math.floor(Math.random()*r.length)]}, null, 3));
+      })
+      .catch((e) =>  res.send(JSON.stringify({ error: [ e ] }, null, 3)));
 })
 ````
 
