@@ -5,7 +5,7 @@ Simple JSON REST API for fetching randomised images
 This is a simple API that allows you to serve randomised images from a folder to the user. Once active it will pick a file at random from the specified directory and link an image from it.
 
 ## Usage
-It should be run like any other Node application. Clone it to a folder on your drive and run `npm install`. When you want to run it, simply use `node app` while in the folder. You can provide to optional parameters to it. These are `port` and `src`.
+It should be run like any other Node application. Clone it to a folder on your drive and run `npm install`. When you want to run it, simply use `node app` while in the folder. You can provide to optional parameters two it. These are `port` and `src`.
 
 By default `port` is given a value of `7000` and `src` is given a value of `img/`. img/ refers to the directory in which all images are stored, if you want to give it a different name, specify here.
 (Example)
