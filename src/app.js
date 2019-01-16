@@ -2,8 +2,6 @@ import express from 'express'; // Import Express
 import fs from 'fs'; // Import File System from Node.JS
 import path from 'path'; // Import Path from Node.JS
 import favicon from 'serve-favicon'; // Lets have a custom icon
-import stylus from 'stylus'; // Stylus for easy CSS writing
-import nib from 'nib'; // Extend Stylus
 import bodyParser from 'body-parser';
 import Promise from 'bluebird';
 
@@ -14,21 +12,7 @@ let port = process.env.port || 7000 ;// Allow custom port number to be specified
 let src = process.env.src || `img/`; // Allow custom img dir names, but default to a folder called /img/
 
 let app = express(); // Init
-app.set('view engine', 'pug'); // Allow us to process pug files
 app.use(favicon(__dirname + '/public/img/favicon.ico')) // The icon for the website
-
-function compile(str, path) { // Compile function for stylus 
-    return stylus(str)
-      .set('filename', path)
-      .use(nib())
-  }
-
-app.use(stylus.middleware(
-    {
-        src: path.join(__dirname + '/public'),
-        compile: compile
-    }
-));
 
 app.use(express.static(path.join(__dirname, '/public'))); // Where we load out static assets from
 
